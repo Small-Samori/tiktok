@@ -1,0 +1,3 @@
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 3: import: command not found
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 6: syntax error near unexpected token `sys.argv'
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 6: `if len(sys.argv) > 1 and sys.argv[1].startswith('shell.') and sys.path and sys.path[0] == '':'

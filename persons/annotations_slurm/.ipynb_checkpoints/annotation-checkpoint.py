@@ -63,7 +63,7 @@ def get_response(prompt, query_func, num_comments):
         except openai.BadRequestError as e:
             print(e); print(f"{num_retries_bad_request}/{max_retries_bad_request} tries more ...")
             if num_retries_bad_request < max_retries_bad_request: 
-                time.sleep(3); num_retries_bad_request+=1
+                time.sleep(1.3**num_retries_bad_request); num_retries_bad_request+=1
             else:
                 response = "<ann>BadRequestError</ann> <exp>BadRequestError</exp>\n" * num_comments
                 retry = False
@@ -71,7 +71,7 @@ def get_response(prompt, query_func, num_comments):
         except (openai.RateLimitError, KeyError, openai.Timeout, openai.APIConnectionError, openai.APIError) as e:
             print(e); print(f"{num_retries_api_error}/{max_retries_api_error} tries more ...")
             if num_retries_api_error < max_retries_api_error: 
-                time.sleep(3); num_retries_api_error+=1
+                time.sleep(1.3**num_retries_api_error); num_retries_api_error+=1
             else:
                 response = "<ann>APIError</ann> <exp>APIError</exp>\n" * num_comments
                 retry = False
@@ -109,7 +109,7 @@ def annotate_comments(ids_all, comments_all, filepath,
 
 def main(comments_csv_path, output_folder):
     df = pd.read_csv(comments_csv_path)
-    df = df.sample(n=20000, random_state=43)
+    df = df.sample(n=100000, random_state=43)
 
     ids_all = list(df['id'])
     comments_all = list(df['text'])

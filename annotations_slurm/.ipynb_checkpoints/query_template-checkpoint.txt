@@ -14,7 +14,7 @@ For example:
 	- For “I am sorry to hear you lost your son to fentanyl OD,” return 010 because the comment directly addresses someone about their drug-related loss.
 	- For “They take fentanyl-laced substances,” return 001 because the comment describes another group’s drug behavior.
 	- For “I lost a partner. I am sorry to hear you lost someone too. My condolences to you and your family,” return 110 if both the speaker’s loss and the direct address are central to the drug-related discussion.
-	- For “You should take a lower dose. They should be careful with supplies from the street,” return 011 if the comment’s main advice and warnings pertain to others, even if the mention of “you” is indirect.
+	- For “You should take a lower dose. They should be careful with supplies from the street,” return 011 if the comment’s main advice and warnings pertain to others and a direct second person.
 
 Important: Focus on the central drug narrative. For example, in the comment below:
 "She was there. I have done every dope. Quitting perc is too much hell"

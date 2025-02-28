@@ -1,0 +1,16 @@
+id	annotation	explanation	time
+0	100	The comment uses first person pronoun 'I' to describe their own experience with taking 2mg daily, making it a first person perspective.	1740705909.3399174
+1	001	The comment uses 'they' to describe others' drug use, making it a third person perspective.	1740705909.3399174
+2	110	The comment combines addressing another person directly with 'you' and sharing personal loss with 'I', making both first and second person perspectives central to the drug-related discussion.	1740705909.3399174
+3	100	The comment uses first person pronoun 'I' to describe their own experience with taking 2mg daily, making it a first person perspective.	1740705909.3399174
+4	001	The comment uses 'they' to describe others' drug use, making it a third person perspective.	1740705909.3399174
+5	110	Both the speaker's own loss due to fentanyl poisoning and the direct address to someone who lost their son to opioids are central drug-related messages.	1740705916.6614275
+6	100	The main drug-related message is the speaker’s personal account of taking 2mg daily.	1740705916.6614275
+7	001	The primary message describes others’ drug use, specifically that their substances are laced with f3nt, making it a third-person perspective.	1740705916.6614275
+8	110	Both the speaker's own loss due to fentanyl poisoning and the direct address to someone who lost their son to opioids are central drug-related messages.	1740705916.6614275
+9	100	The main drug-related message is the speaker’s personal account of taking 2mg daily.	1740705916.6614275
+10	001	The comment primarily describes others' drug use, using the third-person pronoun 'they', which is central to the drug-related message.	1740705926.7532933
+11	110	The comment includes both a second-person address ('you') about a personal loss and the speaker’s own first-person experience ('I'), making both perspectives central to the drug-related discussion.	1740705926.7532933
+12	100	The comment focuses on the speaker’s own drug use experience, using the first-person pronoun 'I', which is central to the drug-related message.	1740705926.7532933
+13	001	The comment primarily describes others' drug use, using the third-person pronoun 'they', which is central to the drug-related message.	1740705926.7532933
+14	110	The comment includes both a second-person address ('you') about a personal loss and the speaker’s own first-person experience ('I'), making both perspectives central to the drug-related discussion.	1740705926.7532933

@@ -1,0 +1,11 @@
+id	annotation	explanation	time
+7.323784431591572e+18	'100'	The comment focuses on the speaker’s personal experience and emotions, using first-person perspective. The mention of 'she' is incidental and not central to a drug-related narrative.	1740707482.6848133
+7.323225150094657e+18	'001'	The comment describes deaths of others due to addiction, focusing on third-person perspective.	1740707482.6848133
+7.245066811917551e+18	'001'	The comment focuses on Old Jimmy’s fear related to the investigation, using third-person perspective in the drug-related context.	1740707482.6848133
+7.191047758913324e+18	'010'	The comment directly addresses another individual with praise, likely related to their drug recovery or similar, using second-person perspective as central to the message.	1740707482.6848133
+7.358853284046931e+18	'101'	The comment reflects the speaker’s personal experience and also describes their father’s situation, making both first and third person perspectives central to the drug-related narrative.	1740707482.6848133
+7.252891871428576e+18	'100'	The comment uses a first-person plural perspective (“We all have it”) to encourage inner strength, making the speaker's collective experience central to the drug-related message.	1740707495.673709
+7.255313982991287e+18	'000'	The comment does not express a central drug-related narrative from any specific perspective (first, second, or third person).	1740707495.673709
+7.25656280431952e+18	'001'	The comment primarily describes others' experiences (“my ex”, “his lawyer”), using third-person pronouns, making an outside perspective central to the drug-related discussion.	1740707495.673709
+7.260791397601936e+18	'000'	The comment is a personal compliment and does not focus on a central drug-related narrative from any specific perspective.	1740707495.673709
+7.246782036974978e+18	'100'	The comment expresses the speaker's own commitment using first person (“I'll replace it”), making the speaker's personal experience central to the drug-related message.	1740707495.673709

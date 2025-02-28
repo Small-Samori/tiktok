@@ -1,0 +1,14 @@
+id,annotation,explanation,time
+0,'100','The comment's main message is the speaker's own experience with taking 2mg daily.',1740705083.2787764
+1,'001','The comment primarily describes others' use, specifically that their substances are adulterated with fentanyl.',1740705083.2787764
+2,'110','The comment includes the speaker's own loss and directly addresses another individual about their loss.',1740705083.2787764
+3,'100','The comment's main message is the speaker's own experience with taking 2mg daily.',1740705083.2787764
+4,'001','The comment primarily describes others' use, specifically that their substances are adulterated with fentanyl.',1740705083.27877645,'110','The comment expresses both the speaker's own loss due to fentanyl poisoning and directly addresses another person's loss of their son to opioids, making both first and second person perspectives central.',1740705091.2032747
+6,'100','The comment focuses on the speaker's own drug use by stating their daily dosage, making the first person perspective central.',1740705091.2032747
+7,'001','The comment describes others' drug use by mentioning 'they' and that their substances are laced with fentanyl, making the third person perspective central.',1740705091.2032747
+8,'110','The comment expresses both the speaker's own loss due to fentanyl poisoning and directly addresses another person's loss of their son to opioids, making both first and second person perspectives central.',1740705091.2032747
+9,'100','The comment focuses on the speaker's own drug use by stating their daily dosage, making the first person perspective central.',1740705091.203274710,'001','The comment describes another group's drug use by referring to "they" and stating that what they take is laced with fentanyl.',1740705096.8035111
+11,'110','The comment includes both a direct address to someone about their drug-related loss (second person) and a personal account of the speaker's own loss (first person), making both perspectives central to the discussion.',1740705096.8035111
+12,'100','The comment focuses on the speaker's own experience with drug use, using first-person pronouns.',1740705096.8035111
+13,'001','The comment describes another group's drug use by referring to "they" and stating that what they take is laced with fentanyl.',1740705096.8035111
+14,'110','The comment includes both a direct address to someone about their drug-related loss (second person) and a personal account of the speaker's own loss (first person), making both perspectives central to the discussion.',1740705096.8035111

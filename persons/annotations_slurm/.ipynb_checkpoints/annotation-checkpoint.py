@@ -91,6 +91,8 @@ def annotate_comments(ids_all, comments_all, filepath,
         comments_batch = comments_all[start: start+batch_size]
         tagged_comments = tag_comments(comments_batch)
 
+        assert len(ids_batch) == len(comments_batch), f"{len(ids_batch)} ids, {len(comments_batch)} comments"
+
         num_comments = len(comments_batch)
         prompt = query_template + tagged_comments
         response = get_response(prompt, query_func, num_comments)
@@ -98,7 +100,9 @@ def annotate_comments(ids_all, comments_all, filepath,
             ann_batch, exp_batch = extract_ann_exp(response)
         except AttributeError:
             ann_batch, exp_batch = ['None']*num_comments, ['None']*num_comments
-            
+
+        assert num_comments == len(ids_batch), f"{len(ids_batch)} ids, {num_comments} comments"
+        
         time_list = [time.time()]*num_comments
         csv_content = [f"{ids_batch[i]}\t'{ann_batch[i]}'\t{exp_batch[i]}\t{time_list[i]}\n" for i in range(len(ids_batch))]
         csv_content = "".join(csv_content)
@@ -109,7 +113,7 @@ def annotate_comments(ids_all, comments_all, filepath,
 
 def main(comments_csv_path, output_folder):
     df = pd.read_csv(comments_csv_path)
-    df = df.sample(n=100000, random_state=43)
+    df = df.sample(n=200000, random_state=43)
 
     ids_all = list(df['id'])
     comments_all = list(df['text'])

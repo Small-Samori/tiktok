@@ -104,16 +104,43 @@ def annotate_comments(ids_all, comments_all, filepath,
         assert num_comments == len(ids_batch), f"{len(ids_batch)} ids, {num_comments} comments"
         
         time_list = [time.time()]*num_comments
-        csv_content = [f"{ids_batch[i]}\t'{ann_batch[i]}'\t{exp_batch[i]}\t{time_list[i]}\n" for i in range(len(ids_batch))]
-        csv_content = "".join(csv_content)
-        all_csv_content += csv_content
-        write_to_file(filepath, csv_content)
+        
+        try:
+            csv_content = [f"{ids_batch[i]}\t'{ann_batch[i]}'\t{exp_batch[i]}\t{time_list[i]}\n" for i in range(num_comments)]
+            csv_content = "".join(csv_content)
+            all_csv_content += csv_content
+            write_to_file(filepath, csv_content)
+        except IndexError as e:
+            print(e)
+            print(f"expected {num_comments}")
+            print(f"but got {len(ids_batch)} ids_batch, {len(ann_batch)} ann_batch, {len(exp_batch)} exp_batch, {len(time_list)} time_list")
+        
 
     if return_results: return all_csv_content
 
+def get_annotated_id(persons_folder):
+    saved_gpt_ann = glob.glob(f"{persons_folder}/*.txt")
+    annotated_ids = []
+    for gpt_ann in saved_gpt_ann:
+        ann_df = pd.read_csv(gpt_ann, delimiter="\t")
+        annotated_ids += list(ann_df['id'])
+    return annotated_ids
+
+def get_selection(df, persons_folder):
+    annotated_ids = list(set(get_annotated_id(persons_folder)))
+    print(len(df), len(annotated_ids))
+    selection = list(~df["id"].isin(annotated_ids))
+    return selection
+
 def main(comments_csv_path, output_folder):
     df = pd.read_csv(comments_csv_path)
-    df = df.sample(n=200000, random_state=43)
+    df = df.sample(n=250000, random_state=43)
+
+    print("filtering annotated ids out ...")
+    selection = get_selection(df, output_folder)
+    df = df[selection].reset_index(drop=True)
+    
+    print(f"Annotating {len(df)} out of {len(selection)} comments")
 
     ids_all = list(df['id'])
     comments_all = list(df['text'])

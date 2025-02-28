@@ -1,0 +1,7 @@
+*.csv
+*.pickle
+*.pkl
+*.db
+*.ipynb_checkpoints/*
+tiktok/*.*
+*.html

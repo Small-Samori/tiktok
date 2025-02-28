@@ -1,0 +1,1 @@
+$HOME/dlatk/dlatkInterface.py -d tiktok_comments -t combined_comments.csv -c text --language_filter en

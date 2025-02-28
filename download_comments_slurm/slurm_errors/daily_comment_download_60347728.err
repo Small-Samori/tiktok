@@ -1,0 +1,76 @@
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 3: import: command not found
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 6: syntax error near unexpected token `sys.argv'
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 6: `if len(sys.argv) > 1 and sys.argv[1].startswith('shell.') and sys.path and sys.path[0] == '':'
+Traceback (most recent call last):
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/connection.py", line 196, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/socket.py", line 963, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/connectionpool.py", line 490, in _make_request
+    raise new_e
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/connectionpool.py", line 466, in _make_request
+    self._validate_conn(conn)
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/connectionpool.py", line 1095, in _validate_conn
+    conn.connect()
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/connection.py", line 615, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/connection.py", line 203, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f9c51e8f2c0>: Failed to resolve 'open.tiktokapis.com' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='open.tiktokapis.com', port=443): Max retries exceeded with url: /v2/oauth/token/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f9c51e8f2c0>: Failed to resolve 'open.tiktokapis.com' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/users/iasamori/tiktok/download_comments_slurm/download_comments.py", line 24, in <module>
+    main()
+  File "/home/users/iasamori/tiktok/download_comments_slurm/download_comments.py", line 21, in main
+    get_comments(video_ids, fields, cursor, save_folder)
+  File "/home/users/iasamori/tiktok/download_comments_slurm/utils.py", line 107, in get_comments
+    credentials = get_access_token(client_key, client_secret)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/iasamori/tiktok/download_comments_slurm/utils.py", line 23, in get_access_token
+    response = requests.post(endpoint_url, headers=headers, data=data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/groups/rbaltman/samori/miniconda3/envs/esm_env/lib/python3.12/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='open.tiktokapis.com', port=443): Max retries exceeded with url: /v2/oauth/token/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f9c51e8f2c0>: Failed to resolve 'open.tiktokapis.com' ([Errno -2] Name or service not known)"))

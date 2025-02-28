@@ -1,0 +1,18 @@
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 3: import: command not found
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 6: syntax error near unexpected token `sys.argv'
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 6: `if len(sys.argv) > 1 and sys.argv[1].startswith('shell.') and sys.path and sys.path[0] == '':'
+Traceback (most recent call last):
+  File "/home/users/iasamori/tiktok/download_comments_slurm/download_comments.py", line 24, in <module>
+    main()
+  File "/home/users/iasamori/tiktok/download_comments_slurm/download_comments.py", line 21, in main
+    get_comments(video_ids, fields, cursor, save_folder)
+  File "/home/users/iasamori/tiktok/download_comments_slurm/utils.py", line 131, in get_comments
+    status_code = query_comments_api_paginate(fields, cursor, video_id, save_folder, log_name, credentials)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/iasamori/tiktok/download_comments_slurm/utils.py", line 91, in query_comments_api_paginate
+    video_id, has_more, cursor, samples, status_code = query_comments_api(query_body, query_params, headers, save_folder)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/iasamori/tiktok/download_comments_slurm/utils.py", line 57, in query_comments_api
+    has_more = data["has_more"]
+               ~~~~^^^^^^^^^^^^
+KeyError: 'has_more'

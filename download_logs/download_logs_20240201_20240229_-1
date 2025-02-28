@@ -1,0 +1,2 @@
+400	True	0	-1	200
+400	False	{'error': {'code': 'invalid_params', 'message': 'The request parameter type is incorrect. request.SearchId expected string, actual value: -1 (json.Number)', 'log_id': '202409020211422B68AA0472DAF56A0985', 'http_status_code': 400}}	-1	400

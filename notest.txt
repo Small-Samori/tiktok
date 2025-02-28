@@ -1,0 +1,6 @@
+1. Some part of video download was broken for 20230401 to 20230415 (cursor 1579). Go back and redownload.
+2. 20230801 to 20230815 seems to be finicky. Skipping August 2023 all together. Go back and check it. (found a way: changed 20230815 to 20230816)
+3.  Some part of video download was broken for  20230801 to 20230816 (cursor 1579). Go back and redownload.
+4. Redownload Sept 2023
+5. Redownload Octo 2023
+6. Video download was broken for 20231215 to 20231231 (cursor 0). Go back and redownload

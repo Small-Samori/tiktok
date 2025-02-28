@@ -1,5 +1,6 @@
 import requests
 import json, math, sys, time
+import openai, re
 from openai import AzureOpenAI
 from dotenv import load_dotenv
 import os, time, glob
@@ -26,67 +27,102 @@ def query_o1(prompt):
     )
     return response.choices[0].message.content
 
-
-def annotate_comments(all_ids, comments):
-    machine_id = int(os.environ.get("SLURM_ARRAY_TASK_ID"))
-    num_machines = int(os.environ.get('SLURM_ARRAY_TASK_COUNT'))
-    
-    with open("./query_template.txt", "r") as f:
+def load_query_template(path="./query_template2.txt"):
+    with open(path, "r") as f:
         query_template = f.read()
-        
-    output_format =  "\n\nResponse format(never deviate, no asteriks or brackets or extra whitespace):\n[Annotation]\n[Explanation]"
+    return query_template
+
+def write_to_file(filepath, content):
+    with open(filepath, "a") as f:
+        f.write(content)
+
+def tag_comments(comment_list):
+    tagged_comments = [f"<comment>{i}<\comment>\n" for i in comment_list]
+    tagged_comments_str = "".join(tagged_comments)
+    return tagged_comments_str
+
+def extract_ann_exp(response):
+    pattern = r"<ann>(.*?)</ann> <exp>(.*?)</exp>"
     
-    # annotations = []
-    # reasonings = []
-    ids = []
-    responses = []
-    
-    for i in tqdm(range(len(comments))):
-        if i%num_machines == machine_id:
-            comment = comments[i]
-            comment_ids = all_ids[i]
-        
-            prompt = query_template + comment + output_format
-            response = query_o1(prompt)
+    response_list = response.split("\n")
+    # AttributeError if one of them does not follow the patter or No match was found
+    ann_batch = [re.search(pattern, i).group(1) for i in response_list]
+    exp_batch = [re.search(pattern, i).group(2) for i in response_list]
+    return ann_batch, exp_batch
+
+def get_response(prompt, query_func, num_comments):
+    retry = True; 
+    max_retries_api_error = 10; num_retries_api_error = 0
+    max_retries_bad_request = 5; num_retries_bad_request = 0
+
+    while retry:
+        try:
+            response = query_func(prompt)
+            retry = False
             
-            # annotation, reasoning = response.split("\n")
-
-            ids.append(comment_ids)
-            responses.append(response)
-            # annotations.append(annotation)
-            # reasonings.append(reasoning)
+        except openai.BadRequestError as e:
+            print(e); print(f"{num_retries_bad_request}/{max_retries_bad_request} tries more ...")
+            if num_retries_bad_request < max_retries_bad_request: 
+                time.sleep(3); num_retries_bad_request+=1
+            else:
+                response = "<ann>BadRequestError</ann> <exp>BadRequestError</exp>\n" * num_comments
+                retry = False
             
-            time.sleep(0.01)
-    # return ids, annotations, reasonings
-    return ids, responses
+        except (openai.RateLimitError, KeyError, openai.Timeout, openai.APIConnectionError, openai.APIError) as e:
+            print(e); print(f"{num_retries_api_error}/{max_retries_api_error} tries more ...")
+            if num_retries_api_error < max_retries_api_error: 
+                time.sleep(3); num_retries_api_error+=1
+            else:
+                response = "<ann>APIError</ann> <exp>APIError</exp>\n" * num_comments
+                retry = False
 
+    return response
 
-def main(comments_path, output_folder):
-    machine_id = int(os.environ.get("SLURM_ARRAY_TASK_ID"))
+def annotate_comments(ids_all, comments_all, filepath, 
+                      batch_size=5, query_func=query_o1, return_results=False):
     
-    df = pd.read_csv(comments_path)
-    df = df.sample(n=10000, random_state=43)
-    
-    all_ids = list(df['id'])
-    comments = list(df['text'])
-
-    # all_ids = all_ids[:30]
-    # comments = comments[:30]
-    
-    # time.sleep(machine_id*)
-    # ids, annotations, reasonings = annotate_comments(all_ids, comments)
-    ids, responses = annotate_comments(all_ids, comments)
+    query_template = load_query_template()
+    write_to_file(filepath, "id\tannotation\texplanation\ttime\n")
+    all_csv_content = ""
+    for start in tqdm(range(0, len(comments_all), batch_size)):
+        retry = True; max_retries = 10; num_retries = 0
         
-    gpt_df = pd.DataFrame()
-    gpt_df["id"] = ids
-    gpt_df["response"] = responses
-    # gpt_df["annotation"] = annotations
-    # gpt_df["reasoning"] = reasonings
-    gpt_df.to_csv(f"{output_folder}/gpt_annotation_mono_machine_{machine_id}.csv", index=None)
+        ids_batch = ids_all[start: start+batch_size]
+        comments_batch = comments_all[start: start+batch_size]
+        tagged_comments = tag_comments(comments_batch)
+
+        num_comments = len(comments_batch)
+        prompt = query_template + tagged_comments
+        response = get_response(prompt, query_func, num_comments)
+        try:
+            ann_batch, exp_batch = extract_ann_exp(response)
+        except AttributeError:
+            ann_batch, exp_batch = ['None']*num_comments, ['None']*num_comments
+            
+        time_list = [time.time()]*num_comments
+        csv_content = [f"{ids_batch[i]}\t'{ann_batch[i]}'\t{exp_batch[i]}\t{time_list[i]}\n" for i in range(len(ids_batch))]
+        csv_content = "".join(csv_content)
+        all_csv_content += csv_content
+        write_to_file(filepath, csv_content)
+
+    if return_results: return all_csv_content
+
+def main(comments_csv_path, output_folder):
+    df = pd.read_csv(comments_csv_path)
+    df = df.sample(n=2, random_state=43)
+
+    ids_all = list(df['id'])
+    comments_all = list(df['text'])
+    start_time = time.time()
+
+    annotate_comments(ids_all, comments_all, 
+                  f"{output_folder}/gpt_annotations_{start_time}.txt", 
+                  batch_size=5, query_func=query_o1)
+
 
 if __name__ == "__main__":
-    input_path = sys.argv[1]
+    comments_csv_path = sys.argv[1]
     output_folder = sys.argv[2]
 
-    main(input_path, output_folder)
+    main(comments_csv_path, output_folder)
 

@@ -6,7 +6,7 @@ echo "CORRECT_NAME  = $2"
 echo "CORRECT_EMAIL = $3"
 echo ""
 
-git filter-branch --env-filter '
+git filter-branch -f --env-filter '
 OLD_EMAIL="'"$1"'"
 CORRECT_NAME="'"$2"'"
 CORRECT_EMAIL="'"$3"'"

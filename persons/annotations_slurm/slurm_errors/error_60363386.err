@@ -1,0 +1,25 @@
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 3: import: command not found
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 6: syntax error near unexpected token `sys.argv'
+/home/groups/rbaltman/samori/miniconda3/condabin/conda: line 6: `if len(sys.argv) > 1 and sys.argv[1].startswith('shell.') and sys.path and sys.path[0] == '':'
+Traceback (most recent call last):
+  File "/home/users/iasamori/tiktok/persons/annotations_slurm/annotation.py", line 3, in <module>
+    from openai import AzureOpenAI
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/openai/__init__.py", line 8, in <module>
+    from . import types
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/openai/types/__init__.py", line 5, in <module>
+    from .batch import Batch as Batch
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/openai/types/batch.py", line 6, in <module>
+    from .._models import BaseModel
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/openai/_models.py", line 24, in <module>
+    from pydantic.fields import FieldInfo
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/pydantic/fields.py", line 20, in <module>
+    from . import types
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/pydantic/types.py", line 39, in <module>
+    from ._internal import _core_utils, _fields, _internal_dataclass, _typing_extra, _utils, _validators
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/pydantic/_internal/_core_utils.py", line 12, in <module>
+    from . import _repr
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/pydantic/_internal/_repr.py", line 11, in <module>
+    from . import _typing_extra
+  File "/home/groups/rbaltman/samori/miniconda3/lib/python3.12/site-packages/pydantic/_internal/_typing_extra.py", line 15, in <module>
+    from typing_extensions import TypeIs, deprecated, get_args, get_origin
+ImportError: cannot import name 'TypeIs' from 'typing_extensions' (/share/software/user/open/py-jupyterlab/4.0.8_py39/lib/python3.9/site-packages/typing_extensions.py). Did you mean: 'Type'?

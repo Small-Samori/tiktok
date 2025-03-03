@@ -7,3 +7,5 @@ tiktok/*.*
 *.html
 *.err
 *.log
+*.npy
+*.out

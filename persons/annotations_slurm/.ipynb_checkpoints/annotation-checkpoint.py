@@ -115,7 +115,6 @@ def annotate_comments(ids_all, comments_all, filepath,
             print(f"expected {num_comments}")
             print(f"but got {len(ids_batch)} ids_batch, {len(ann_batch)} ann_batch, {len(exp_batch)} exp_batch, {len(time_list)} time_list")
         
-
     if return_results: return all_csv_content
 
 def get_annotated_id(persons_folder):
@@ -128,7 +127,6 @@ def get_annotated_id(persons_folder):
 
 def get_selection(df, persons_folder):
     annotated_ids = list(set(get_annotated_id(persons_folder)))
-    print(len(df), len(annotated_ids))
     selection = list(~df["id"].isin(annotated_ids))
     return selection
 

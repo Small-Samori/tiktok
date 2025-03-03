@@ -14,7 +14,7 @@ def remove_short_text(data_path):
     data = data.rename(columns={'text': 'message', 'id':'message_id'})
     data = data.reset_index()
     
-    threshold = 3
+    threshold = 5
     data['message_split'] = [i.split(' ') for i in data['message']]
     lengths = [len(i) for i in data['message_split']]
     
@@ -31,7 +31,7 @@ def process_and_tokenize(data_text):
     data_text = [re.sub('\s+', ' ', sent) for sent in data_text] # remove newlines
     data_text = [re.sub("\'", "", sent) for sent in data_text] # remove single quotes
 
-    tokenized_data_text = [gensim.utils.simple_preprocess(str(sent), deacc=True) for sent in data_text]
+    tokenized_data_text = [gensim.utils.simple_preprocess(str(sent), deacc=True, min_len=5, max_len=10**100) for sent in data_text]
 
     return tokenized_data_text
 

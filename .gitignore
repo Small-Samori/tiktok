@@ -9,3 +9,4 @@ tiktok/*.*
 *.log
 *.npy
 *.out
+*/.ipynb_checkpoints/
